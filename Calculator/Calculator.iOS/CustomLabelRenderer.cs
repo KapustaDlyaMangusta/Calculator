@@ -83,9 +83,11 @@ namespace Calculator.iOS
                 TextAlignment.Center => UITextAlignment.Center,
                 TextAlignment.End => UITextAlignment.Right,
                 _ => UITextAlignment.Left
-            }; 
+            };
+
             Control.Selectable = true;
-            Control.Editable = false;
+            Control.InputView = new UIView();
+            Control.Editable = true;
             Control.ScrollEnabled = false;
             Control.ShouldInteractWithUrl += delegate { return true; };
         }
