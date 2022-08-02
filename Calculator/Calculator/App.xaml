@@ -6,5 +6,6 @@
         <Color x:Key="FunctionBGColor">#a3a09b</Color>
         <Color x:Key="OperatorBGColor">#ed9609</Color>
         <Color x:Key="NumerBGColor">#454444</Color>
+        <Color x:Key="DefaultPageBGColor">#0f0f0f</Color>
     </Application.Resources>
 </Application>

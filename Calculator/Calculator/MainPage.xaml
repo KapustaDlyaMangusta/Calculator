@@ -1,15 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage BackgroundColor="#0f0f0f"
+<ContentPage BackgroundColor="{StaticResource DefaultPageBGColor}"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Calculator.MainPage">
+             x:Class="Calculator.MainPage"
+             NavigationPage.HasNavigationBar="False"
+             Padding="12,0">
 
     <StackLayout>
-        <Label Text="Hello! This is a calculator." HorizontalTextAlignment="Center" TextColor="White" FontSize="36" Padding="20, 10"/>
+        <Label Text="Hello! This is a calculator."
+               HorizontalTextAlignment="Center"
+               TextColor="White"
+               FontSize="36"
+               Margin="20, 10"/>
 
-        <Button Text="Start!" CornerRadius="20" TextColor="White" FontSize="24" Padding="20, 10" 
-            VerticalOptions="CenterAndExpand" Clicked="NavigateToCalculator" BackgroundColor="#e8831e">
-        </Button>
+        <Button Text="Start!"
+                CornerRadius="20"
+                TextColor="White"
+                FontSize="24"
+                Padding="20, 10" 
+                VerticalOptions="EndAndExpand"
+                Clicked="NavigateToCalculator"
+                BackgroundColor="{StaticResource OperatorBGColor}"/>
 
     </StackLayout>
 
