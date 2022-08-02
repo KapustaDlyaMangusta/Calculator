@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,17 +22,22 @@ namespace Calculator
         private string operatorName;
         private bool isClicked;
 
-        private bool CheckOnDot()
+        public ICommand LongTappedEffectCommand => new Command(() =>
         {
-            for (int i = 0; CalculationValue.Text.Length < i; i++)
-            {
-                if (CalculationValue.Text[i] == '.')
-                {
-                    return false;
-                }
+            var question = DisplayAlert("Copy?", "Do you want to paste value", "Yes", "No");
 
+         });
+        
+        private void ValidateValue()
+        {
+            try
+            {
+                Convert.ToDecimal(CalculationValue.Text);
             }
-            return true;
+            catch
+            {
+                CalculationValue.Text = CalculationValue.Text.Remove(CalculationValue.Text.Length - 1, 1);
+            }
         }
 
         private void Typing(object sender, EventArgs e)
@@ -39,27 +45,23 @@ namespace Calculator
             var button = sender as Button;
             if (CalculationValue.Text == "0" || isClicked)
             {
-                isClicked = false;
-                if (button.Text == ".")
+                if(button.Text == ".")
                 {
-                    if(CheckOnDot() == true)
-                    {
-                        CalculationValue.Text += button.Text;
-                    }
-                    else
-                    {
-                        CalculationValue.Text = CalculationValue.Text;
-                    }
+                    CalculationValue.Text += button.Text;
                 }
                 else
                 {
+
                     CalculationValue.Text = button.Text;
+                    isClicked = false;
                 }
             }
             else
             {
                 CalculationValue.Text += button.Text;
+                ValidateValue();
             }
+            
         }
 
         private void AbsoluteClear(object sender, EventArgs e)

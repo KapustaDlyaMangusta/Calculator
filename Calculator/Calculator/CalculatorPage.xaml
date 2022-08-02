@@ -1,269 +1,191 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:local="clr-namespace:Calculator"
              x:Class="Calculator.CalculatorPage"
-             BackgroundColor="#000000">
+             BackgroundColor="#000000"
+             x:Name="_self">
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+        
+        
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <Frame BackgroundColor="#000000"
-               Padding="15">
-                <Label x:Name="CalculationValue"
-                   HorizontalOptions="End"
-                   Text="0"
-                   FontSize="45"
-                   FontAttributes="Bold"
-                   TextColor="#ffffff"
-                   /> 
-                
-        </Frame>
+        <Grid RowDefinitions="5*,3*,3*,3*,3*,3*" 
+                  ColumnDefinitions="*,*,*,*">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-
-                <Button Grid.Row="0" 
+            <local:EnabledLabelCopy
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Padding="15"
+                HorizontalTextAlignment="End"
+                VerticalTextAlignment="End"
+                x:Name="CalculationValue" 
+                Text=""
+                FontSize="45"
+                FontAttributes="Bold"
+                TextColor="#ffffff"
+                />
+            <Button 
+                BackgroundColor="{StaticResource FunctionBGColor}"
+                Grid.Row="1" 
                 Grid.Column="0"
                 Text="AC"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                x:Name="AbsoluteClearButton"
-                BackgroundColor="#96948d"
-                TextColor="White"
                 Clicked="AbsoluteClear"
                 />
-                
-                <Button Grid.Row="0" 
+
+                <Button 
+                BackgroundColor="{StaticResource FunctionBGColor}"
+                Grid.Row="1" 
                 Grid.Column="1"
                 Text="C"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                x:Name="ClearButton"
-                BackgroundColor="#96948d"
-                TextColor="White"
                 Clicked="Clear"
                 />
-                
-                <Button Grid.Row="0" 
+
+                <Button 
+                BackgroundColor="{StaticResource FunctionBGColor}"
+                Grid.Row="1" 
                 Grid.Column="2"
                 Text="%"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
                 x:Name="PercentageButton"
-                BackgroundColor="#96948d"
-                TextColor="White"
                 Clicked="Percentage"
                 />
-                
-                <Button Grid.Row="0" 
+
+                <Button 
+                BackgroundColor="{StaticResource OperatorBGColor}"
+                Grid.Row="1" 
                 Grid.Column="3"
                 Text="/"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#e8831e"
-                TextColor="White"
                 Clicked="Operation"
                 />
 
-                <Button 
-                Grid.Row="1" 
-                Grid.Column="0"
-                Text="1"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                x:Name="BtnOne"
-                BackgroundColor="#454444"
-                TextColor="White"
-                Clicked="Typing"
-                />
-                
-                <Button 
-                Grid.Row="1" 
-                Grid.Column="1"
-                Text="2"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"
-                Clicked="Typing"
-                />
-                
-                <Button 
-                Grid.Row="1" 
-                Grid.Column="2"
-                Text="3"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"
-                Clicked="Typing"   
-                />
-                
-                <Button 
-                Grid.Row="1" 
-                Grid.Column="3"
-                Text="X"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#e8831e"
-                TextColor="White"
-                Clicked="Operation"
-                />
-
-                <Button 
+                <Button
+                BackgroundColor="{StaticResource NumerBGColor}"
                 Grid.Row="2" 
-                Grid.Column="0"
-                Text="4"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"
-                Clicked="Typing"
-                />
-                
-                <Button 
-                Grid.Row="2" 
-                Grid.Column="1"
-                Text="5"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"
-                Clicked="Typing"
-                />
-                
-                <Button 
-                Grid.Row="2" 
-                Grid.Column="2"
-                Text="6"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"
-                Clicked="Typing"    
-                />
-                
-                <Button 
-                Grid.Row="2" 
-                Grid.Column="3"
-                Text="-"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#e8831e"
-                TextColor="White"
-                Clicked="Operation"
-                />
-
-                <Button 
-                Grid.Row="3" 
                 Grid.Column="0"
                 Text="7"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"
+                Clicked="Typing"
+                />
+
+                <Button
+                BackgroundColor="{StaticResource NumerBGColor}"
+                Grid.Row="2" 
+                Grid.Column="1"
+                Text="8"
+                Clicked="Typing"
+                />
+
+                <Button
+                BackgroundColor="{StaticResource NumerBGColor}"   
+                Grid.Row="2" 
+                Grid.Column="2"
+                Text="9"
                 Clicked="Typing"   
                 />
-                
+
+                <Button 
+                BackgroundColor="{StaticResource OperatorBGColor}"
+                Grid.Row="2" 
+                Grid.Column="3"
+                Text="X"
+                Clicked="Operation"
+                />
+
+                <Button
+                BackgroundColor="{StaticResource NumerBGColor}"
+                Grid.Row="3" 
+                Grid.Column="0"
+                Text="4"
+                Clicked="Typing"
+                />
+
                 <Button 
                 Grid.Row="3" 
                 Grid.Column="1"
-                Text="8"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"
+                Text="5"
+                BackgroundColor="{StaticResource NumerBGColor}"
                 Clicked="Typing"
                 />
-                
+
                 <Button 
                 Grid.Row="3" 
                 Grid.Column="2"
-                Text="9"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"
-                Clicked="Typing"
+                Text="6"
+                BackgroundColor="{StaticResource NumerBGColor}"
+                Clicked="Typing"    
                 />
-                
-                <Button 
+
+                <Button
+                BackgroundColor="{StaticResource OperatorBGColor}"    
                 Grid.Row="3" 
                 Grid.Column="3"
-                Grid.RowSpan="2"
-                Text="+"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#e8831e"
-                TextColor="White"
+                Text="-"
                 Clicked="Operation"
                 />
 
                 <Button 
                 Grid.Row="4" 
                 Grid.Column="0"
-                Text="."
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"    
-                Clicked="Typing"
+                Text="1"
+                BackgroundColor="{StaticResource NumerBGColor}"
+                Clicked="Typing"   
                 />
-                
+
                 <Button 
                 Grid.Row="4" 
                 Grid.Column="1"
-                Text="0"
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                BackgroundColor="#454444"
-                TextColor="White"
-                Clicked="Typing"                    
+                Text="2"
+                BackgroundColor="{StaticResource NumerBGColor}"
+                Clicked="Typing"
                 />
-                
+
                 <Button 
                 Grid.Row="4" 
                 Grid.Column="2"
+                Text="3"
+                BackgroundColor="{StaticResource NumerBGColor}"
+                Clicked="Typing"
+                />
+
+                <Button
+                BackgroundColor="{StaticResource OperatorBGColor}"   
+                Grid.Row="4" 
+                Grid.Column="3"
+                Text="+"
+                Clicked="Operation"
+                />
+
+                <Button 
+                Grid.Row="5" 
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Text="0"
+                BackgroundColor="{StaticResource NumerBGColor}"
+                Clicked="Typing"                    
+                />
+
+                <Button 
+                Grid.Row="5" 
+                Grid.Column="2"
+                Text="."
+                BackgroundColor="{StaticResource NumerBGColor}"    
+                Clicked="Typing"
+                />
+
+                <Button
+                BackgroundColor="{StaticResource OperatorBGColor}"    
+                Grid.Row="5" 
+                Grid.Column="3"
                 Text="="
-                FontSize="Large"
-                FontAttributes="Bold"
-                Padding="30"
-                x:Name="BtnEqual"
-                BackgroundColor="#454444"
-                TextColor="White"
                 Clicked="Equal"
                 />
             </Grid>
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
