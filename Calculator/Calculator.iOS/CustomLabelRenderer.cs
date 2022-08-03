@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
-using Calculator;
+using Calculator.Controls;
 using Calculator.iOS;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(EnabledLabelCopy), typeof(CustomLabelRenderer))]
+[assembly: ExportRenderer(typeof(EnabledCopyLabel), typeof(CustomLabelRenderer))]
 namespace Calculator.iOS
 {
     public class CustomLabelRenderer : ViewRenderer<Label, UITextView>

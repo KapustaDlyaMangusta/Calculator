@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 
-namespace Calculator
+namespace Calculator.Controls
 {
-    public class EnabledLabelCopy : Label
+    public class EnabledCopyLabel : Label
     {
 
     }

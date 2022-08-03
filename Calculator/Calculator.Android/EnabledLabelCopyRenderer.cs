@@ -1,10 +1,10 @@
 ﻿using Android.Content;
-using Calculator;
+using Calculator.Controls;
 using Calculator.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(EnabledLabelCopy), typeof(EnabledLabelCopyRenderer))]
+[assembly: ExportRenderer(typeof(EnabledCopyLabel), typeof(EnabledLabelCopyRenderer))]
 namespace Calculator.Droid
 {
     public class EnabledLabelCopyRenderer : LabelRenderer

@@ -4,7 +4,9 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="True"
-             xmlns:local="clr-namespace:Calculator"
+             xmlns:controls="clr-namespace:Calculator.Controls"
+             xmlns:viewmodels="clr-namespace:Calculator.ViewModels"
+             xmlns:local ="clr-namespace:Calculator"
              x:Class="Calculator.CalculatorPage"
              BackgroundColor="{StaticResource DefaultPageBGColor}"
              NavigationPage.HasNavigationBar="False"
@@ -16,180 +18,158 @@
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="TextColor" Value="White"/>
         </Style>
-        
-        
     </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewmodels:CalculatorViewModel/>
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <Grid RowDefinitions="5*,3*,3*,3*,3*,3*" 
-                  ColumnDefinitions="*,*,*,*">
+              ColumnDefinitions="*,*,*,*">
 
-            <local:EnabledLabelCopy
-                Grid.Row="0"
-                Grid.Column="0"
-                Grid.ColumnSpan="4"
-                Padding="15"
-                HorizontalTextAlignment="End"
-                VerticalTextAlignment="End"
-                x:Name="CalculationValue" 
-                Text="0"
-                FontSize="45"
-                FontAttributes="Bold"
-                TextColor="#ffffff"
-                />
-            <Button 
-                BackgroundColor="{StaticResource FunctionBGColor}"
-                Grid.Row="1" 
-                Grid.Column="0"
-                Text="AC"
-                Clicked="AbsoluteClear"
-                />
+            <controls:EnabledCopyLabel Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="4"
+                                       Padding="15"
+                                       HorizontalTextAlignment="End"
+                                       VerticalTextAlignment="End"
+                                       x:Name="CalculationValue" 
+                                       Text="{Binding CalculateValue}"
+                                       FontSize="45"
+                                       FontAttributes="Bold"
+                                       TextColor="#ffffff" />
+            
+            <Button BackgroundColor="{StaticResource FunctionBGColor}"
+                    Grid.Row="1" 
+                    Grid.Column="0"
+                    Text="{x:Static local:Constants.AbsoluteClear}"
+                    Command="{Binding AbsoluteClearCommand}" />
 
-                <Button 
-                BackgroundColor="{StaticResource FunctionBGColor}"
-                Grid.Row="1" 
-                Grid.Column="1"
-                Text="C"
-                Clicked="Clear"
-                />
+            <Button BackgroundColor="{StaticResource FunctionBGColor}"
+                    Grid.Row="1" 
+                    Grid.Column="1"
+                    Text="{x:Static local:Constants.Clear}"
+                    Command="{Binding ClearCommand}" />
 
-                <Button 
-                BackgroundColor="{StaticResource FunctionBGColor}"
-                Grid.Row="1" 
-                Grid.Column="2"
-                Text="%"
-                x:Name="PercentageButton"
-                Clicked="Percentage"
-                />
+            <Button BackgroundColor="{StaticResource FunctionBGColor}"
+                    Grid.Row="1" 
+                    Grid.Column="2"
+                    Text="{x:Static local:Constants.Percentage}"
+                    x:Name="PercentageButton"
+                    Command="{Binding PercentageCommand}" />
 
-                <Button 
-                BackgroundColor="{StaticResource OperatorBGColor}"
-                Grid.Row="1" 
-                Grid.Column="3"
-                Text="/"
-                Clicked="Operation"
-                />
+            <Button BackgroundColor="{StaticResource OperatorBGColor}"
+                    Grid.Row="1" 
+                    Grid.Column="3"
+                    Text="{x:Static local:Constants.Divide}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button
-                BackgroundColor="{StaticResource NumerBGColor}"
-                Grid.Row="2" 
-                Grid.Column="0"
-                Text="7"
-                Clicked="Typing"
-                />
+            <Button BackgroundColor="{StaticResource NumerBGColor}"
+                    Grid.Row="2" 
+                    Grid.Column="0"
+                    Text="{x:Static local:Constants.Seven}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button
-                BackgroundColor="{StaticResource NumerBGColor}"
-                Grid.Row="2" 
-                Grid.Column="1"
-                Text="8"
-                Clicked="Typing"
-                />
+            <Button BackgroundColor="{StaticResource NumerBGColor}"
+                    Grid.Row="2" 
+                    Grid.Column="1"
+                    Text="{x:Static local:Constants.Eight}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button
-                BackgroundColor="{StaticResource NumerBGColor}"   
-                Grid.Row="2" 
-                Grid.Column="2"
-                Text="9"
-                Clicked="Typing"   
-                />
+            <Button BackgroundColor="{StaticResource NumerBGColor}"   
+                    Grid.Row="2" 
+                    Grid.Column="2"
+                    Text="{x:Static local:Constants.Nine}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button 
-                BackgroundColor="{StaticResource OperatorBGColor}"
-                Grid.Row="2" 
-                Grid.Column="3"
-                Text="X"
-                Clicked="Operation"
-                />
+            <Button BackgroundColor="{StaticResource OperatorBGColor}"
+                    Grid.Row="2" 
+                    Grid.Column="3"
+                    Text="{x:Static local:Constants.Multiply}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button
-                BackgroundColor="{StaticResource NumerBGColor}"
-                Grid.Row="3" 
-                Grid.Column="0"
-                Text="4"
-                Clicked="Typing"
-                />
+            <Button BackgroundColor="{StaticResource NumerBGColor}"
+                    Grid.Row="3" 
+                    Grid.Column="0"
+                    Text="{x:Static local:Constants.Four}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button 
-                Grid.Row="3" 
-                Grid.Column="1"
-                Text="5"
-                BackgroundColor="{StaticResource NumerBGColor}"
-                Clicked="Typing"
-                />
+            <Button Grid.Row="3" 
+                    Grid.Column="1"
+                    Text="{x:Static local:Constants.Five}"
+                    BackgroundColor="{StaticResource NumerBGColor}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button 
-                Grid.Row="3" 
-                Grid.Column="2"
-                Text="6"
-                BackgroundColor="{StaticResource NumerBGColor}"
-                Clicked="Typing"    
-                />
+            <Button Grid.Row="3" 
+                    Grid.Column="2"
+                    Text="{x:Static local:Constants.Six}"
+                    BackgroundColor="{StaticResource NumerBGColor}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button
-                BackgroundColor="{StaticResource OperatorBGColor}"    
-                Grid.Row="3" 
-                Grid.Column="3"
-                Text="-"
-                Clicked="Operation"
-                />
+            <Button BackgroundColor="{StaticResource OperatorBGColor}"    
+                    Grid.Row="3" 
+                    Grid.Column="3"
+                    Text="{x:Static local:Constants.Minus}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button 
-                Grid.Row="4" 
-                Grid.Column="0"
-                Text="1"
-                BackgroundColor="{StaticResource NumerBGColor}"
-                Clicked="Typing"   
-                />
+            <Button Grid.Row="4" 
+                    Grid.Column="0"
+                    Text="{x:Static local:Constants.One}"
+                    BackgroundColor="{StaticResource NumerBGColor}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button 
-                Grid.Row="4" 
-                Grid.Column="1"
-                Text="2"
-                BackgroundColor="{StaticResource NumerBGColor}"
-                Clicked="Typing"
-                />
+            <Button Grid.Row="4" 
+                    Grid.Column="1"
+                    Text="{x:Static local:Constants.Two}"
+                    BackgroundColor="{StaticResource NumerBGColor}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button 
-                Grid.Row="4" 
-                Grid.Column="2"
-                Text="3"
-                BackgroundColor="{StaticResource NumerBGColor}"
-                Clicked="Typing"
-                />
+            <Button Grid.Row="4" 
+                    Grid.Column="2"
+                    Text="{x:Static local:Constants.Three}"
+                    BackgroundColor="{StaticResource NumerBGColor}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button
-                BackgroundColor="{StaticResource OperatorBGColor}"   
-                Grid.Row="4" 
-                Grid.Column="3"
-                Text="+"
-                Clicked="Operation"
-                />
+            <Button BackgroundColor="{StaticResource OperatorBGColor}"   
+                    Grid.Row="4" 
+                    Grid.Column="3"
+                    Text="{x:Static local:Constants.Plus}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button 
-                Grid.Row="5" 
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Text="0"
-                BackgroundColor="{StaticResource NumerBGColor}"
-                Clicked="Typing"                    
-                />
+            <Button Grid.Row="5" 
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Text="{x:Static local:Constants.Zero}"
+                    BackgroundColor="{StaticResource NumerBGColor}"
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button 
-                Grid.Row="5" 
-                Grid.Column="2"
-                Text="."
-                BackgroundColor="{StaticResource NumerBGColor}"    
-                Clicked="Typing"
-                />
+            <Button Grid.Row="5" 
+                    Grid.Column="2"
+                    Text="{x:Static local:Constants.Dot}"
+                    BackgroundColor="{StaticResource NumerBGColor}"    
+                    Command="{Binding TypingCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}" />
 
-                <Button
-                BackgroundColor="{StaticResource OperatorBGColor}"    
-                Grid.Row="5" 
-                Grid.Column="3"
-                Text="="
-                Clicked="Equal"
-                />
-            </Grid>
+            <Button BackgroundColor="{StaticResource OperatorBGColor}"    
+                    Grid.Row="5" 
+                    Grid.Column="3"
+                    Text="{x:Static local:Constants.Equal}"
+                    Command="{Binding EqualCommand}" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
