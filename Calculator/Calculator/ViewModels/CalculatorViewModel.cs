@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace Calculator.ViewModels
 {
-    public class CalculatorViewModel : INotifyPropertyChanged
+    public class CalculatorViewModel : BaseViewModel
     {
         private decimal _firstNumber;
         private string _operatorName;
@@ -26,7 +26,6 @@ namespace Calculator.ViewModels
             EqualCommand = new Command(Equal);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public string CalculateValue
         {
@@ -35,10 +34,9 @@ namespace Calculator.ViewModels
             {
                 var temp = _calculateValue;
                 _calculateValue = ValidateValue.Validate(value) ? value : temp;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CalculateValue)));
+                SetProperty(nameof(CalculateValue));
             }
         }
-
 
         public ICommand TypingCommand { get; }
         
@@ -52,43 +50,14 @@ namespace Calculator.ViewModels
 
         public ICommand EqualCommand { get; } 
 
-
-        private Task DisplayAlert(string title, string message, string cancel) 
+        private decimal Calculate(decimal firstNumber, decimal secondNumber) => _operatorName switch
         {
-            return Application.Current.MainPage.DisplayAlert(title, message, cancel);
-        }
-
-        private decimal Calculate(decimal firstNumber, decimal secondNumber)
-        {
-            return _operatorName switch
-            {
-                Constants.Plus => firstNumber + secondNumber,
-                Constants.Minus => firstNumber - secondNumber,
-                Constants.Multiply => firstNumber * secondNumber,
-                Constants.Divide => firstNumber / secondNumber,
-                _ => 0
-            };
-
-            //decimal result = 0;
-            //switch (_operatorName)
-            //{
-            //    case Constants.Plus:
-            //        result = firstNumber + secondNumber;
-            //        return result;
-            //    case Constants.Minus:
-            //        result = firstNumber - secondNumber;
-            //        return result;
-            //    case Constants.Multiply:
-            //        result = firstNumber * secondNumber;
-            //        return result;
-            //    case Constants.Divide:
-            //        result = firstNumber / secondNumber;
-            //        return result;
-            //    default:
-            //        return result;
-            //}
-
-        }
+            Constants.Plus => firstNumber + secondNumber,
+            Constants.Minus => firstNumber - secondNumber,
+            Constants.Multiply => firstNumber * secondNumber,
+            Constants.Divide => firstNumber / secondNumber,
+            _ => 0
+        };
 
         private void AbsoluteClear()
         {
